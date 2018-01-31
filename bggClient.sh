@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ -z "${BGG_USER}" ]]; then
+   echo -e "Please set \033[0;31mBGG_USER\033[0m as enviorment variable"
+   exit 1
+fi
+
 numberOfRows=9999
 page=1
 outputFile="$BGG_USER.xml"
