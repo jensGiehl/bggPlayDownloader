@@ -8,7 +8,8 @@ targetDir="$BGG_USER/$currentDate"
 mkdir --parents $targetDir
 while [ $numberOfRows -gt 1 ]
 do
-   wget -q --no-http-keep-alive --output-document=$outputFile "https://www.boardgamegeek.com/xmlapi2/plays?username=$BGG_USER&page=$page"
+   ./wgetRetry.sh "https://www.boardgamegeek.com/xmlapi2/plays?username=$BGG_USER&page=$page" $outputFile
+   #wget -q --no-http-keep-alive --output-document=$outputFile "https://www.boardgamegeek.com/xmlapi2/plays?username=$BGG_USER&page=$page"
    numberOfRows=`cat $outputFile |wc -l`
    logger "BGG Page $page has $numberOfRows rows (User=$BGG_USER)"
    if [ $numberOfRows -gt 1 ]; then
